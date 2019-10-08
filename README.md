@@ -1,1 +1,1 @@
-# custom-metrics
+# custom-actuator-endpoints
