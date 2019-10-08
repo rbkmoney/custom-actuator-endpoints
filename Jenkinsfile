@@ -8,6 +8,6 @@ build('custom-actuator-endpoints', 'docker-host') {
         javaLibPipeline = load("build_utils/jenkins_lib/pipeJavaLib.groovy")
     }
 
-    def buildImageTag = "269686d735abef363f9f40a1bf4e1b7c751f3722"
+    def buildImageTag = "bdc05544014b3475c8e0726d3b3d6fc81b09db96"
     javaLibPipeline(buildImageTag)
 }
