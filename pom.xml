@@ -13,7 +13,7 @@
     <packaging>jar</packaging>
     <groupId>com.rbkmoney</groupId>
     <artifactId>custom-actuator-endpoints</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 
     <description>Actuator info enrichment</description>
 
@@ -42,7 +42,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.10</version>
+            <version>1.18.12</version>
         </dependency>
     </dependencies>
     <build>
@@ -50,7 +50,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.2</version>
+                <version>0.8.5</version>
                 <configuration>
                     <destFile>${sonar.jacoco.reportPath}</destFile>
                     <append>true</append>
