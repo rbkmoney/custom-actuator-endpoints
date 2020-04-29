@@ -8,6 +8,7 @@ import org.springframework.boot.actuate.info.InfoEndpoint;
 
 import javax.annotation.PostConstruct;
 import java.lang.management.ManagementFactory;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -20,8 +21,9 @@ public class ServiceVersionHealthIndicator implements HealthIndicator {
     @Override
     public Health health() {
         return Health.up()
-                .withDetail("git.commit", ((Map<String, Object>)((Map<String, Object>)infoEndpoint.info().get("git")).get("commit")).get("id"))
+                .withDetail("git.commit", ((Map<String, Object>) ((Map<String, Object>) infoEndpoint.info().get("git")).get("commit")).get("id"))
                 .withDetail("uptime", getUptimeFormatted(ManagementFactory.getRuntimeMXBean().getUptime()))
+                .withDetail("service", getServiceInfo(((Map<String, Object>) infoEndpoint.info().get("build"))))
                 .build();
     }
 
@@ -30,8 +32,7 @@ public class ServiceVersionHealthIndicator implements HealthIndicator {
         log.info("Added service version health indicator");
     }
 
-
-    protected String getUptimeFormatted(long uptimeMillis) {
+    private String getUptimeFormatted(long uptimeMillis) {
 
         long days = TimeUnit.MILLISECONDS.toDays(uptimeMillis);
         uptimeMillis -= TimeUnit.DAYS.toMillis(days);
@@ -44,6 +45,13 @@ public class ServiceVersionHealthIndicator implements HealthIndicator {
 
         long seconds = TimeUnit.MILLISECONDS.toSeconds(uptimeMillis);
 
-        return String.format("%dd, %dh, %dm, %ds ", days, hours, minutes, seconds);
+        return String.format("%dd, %dh, %dm, %ds", days, hours, minutes, seconds);
+    }
+
+    private Map<String, Object> getServiceInfo(Map<String, Object> buildMap) {
+        final HashMap<String, Object> serviceInfoMap = new HashMap<String, Object>();
+        serviceInfoMap.put("name", buildMap.get("artifact"));
+        serviceInfoMap.put("version", buildMap.get("version"));
+        return serviceInfoMap;
     }
 }
