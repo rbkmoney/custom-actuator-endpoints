@@ -49,7 +49,7 @@ public class ServiceVersionHealthIndicator implements HealthIndicator {
     }
 
     private Map<String, Object> getServiceInfo(Map<String, Object> buildMap) {
-        final HashMap<String, Object> serviceInfoMap = new HashMap<String, Object>();
+        final HashMap<String, Object> serviceInfoMap = new HashMap<>();
         serviceInfoMap.put("name", buildMap.get("artifact"));
         serviceInfoMap.put("version", buildMap.get("version"));
         return serviceInfoMap;
