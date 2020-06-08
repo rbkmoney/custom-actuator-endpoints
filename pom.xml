@@ -6,16 +6,33 @@
     <parent>
         <groupId>com.rbkmoney</groupId>
         <artifactId>parent</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.4</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
     <groupId>com.rbkmoney</groupId>
     <artifactId>custom-actuator-endpoints</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
 
+    <name>Custom actuator endpoints</name>
     <description>Actuator info enrichment</description>
+    <url>https://github.com/rbkmoney/custom-actuator-endpoints.git</url>
+
+    <developers>
+        <developer>
+            <name>Nikita Pospolita</name>
+            <email>n.pospolita@rbkmoney.com</email>
+            <organization>RBK.money</organization>
+            <organizationUrl>https://rbk.money</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/rbkmoney/custom-actuator-endpoints.git</connection>
+        <developerConnection>scm:git:ssh://github.com/rbkmoney/custom-actuator-endpoints.git</developerConnection>
+        <url>https://github.com/rbkmoney/custom-actuator-endpoints/tree/master</url>
+    </scm>
 
     <properties>
         <java.version>11</java.version>
