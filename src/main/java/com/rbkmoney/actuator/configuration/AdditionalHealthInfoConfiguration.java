@@ -1,6 +1,7 @@
 package com.rbkmoney.actuator.configuration;
 
 import com.rbkmoney.actuator.indicators.ServiceVersionHealthIndicator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.boot.actuate.info.InfoEndpoint;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -12,8 +13,10 @@ import org.springframework.context.annotation.Configuration;
 public class AdditionalHealthInfoConfiguration {
 
     @Bean
-    public HealthIndicator serviceVersionHealthIndicator(InfoEndpoint infoEndpoint) {
-        return new ServiceVersionHealthIndicator(infoEndpoint);
+    public HealthIndicator serviceVersionHealthIndicator(
+            InfoEndpoint infoEndpoint,
+            @Value("${spring.application.name}") String applicationName) {
+        return new ServiceVersionHealthIndicator(infoEndpoint, applicationName);
     }
 
 }
