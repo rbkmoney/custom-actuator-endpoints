@@ -16,7 +16,7 @@ public class AdditionalHealthInfoConfiguration {
     public HealthIndicator serviceVersionHealthIndicator(
             InfoEndpoint infoEndpoint,
             @Value("${spring.application.name}") String applicationName) {
-        return new ServiceVersionHealthIndicator(infoEndpoint,applicationName);
+        return new ServiceVersionHealthIndicator(infoEndpoint, applicationName);
     }
 
 }
