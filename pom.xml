@@ -33,6 +33,10 @@
         <url>https://github.com/rbkmoney/custom-actuator-endpoints/tree/master</url>
     </scm>
 
+    <properties>
+        <java.version>11</java.version>
+    </properties>
+    
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
