@@ -17,11 +17,18 @@ import java.util.concurrent.TimeUnit;
 public class ServiceVersionHealthIndicator implements HealthIndicator {
 
     private final InfoEndpoint infoEndpoint;
+    private final String applicationName;
 
     @Override
     public Health health() {
+        Object commitId = (
+                (Map<String, Object>) (
+                        (Map<String, Object>) infoEndpoint.info()
+                                .get("git"))
+                        .get("commit"))
+                .get("id");
         return Health.up()
-                .withDetail("git.commit", ((Map<String, Object>) ((Map<String, Object>) infoEndpoint.info().get("git")).get("commit")).get("id"))
+                .withDetail("git.commit", commitId)
                 .withDetail("uptime", getUptimeFormatted(ManagementFactory.getRuntimeMXBean().getUptime()))
                 .withDetail("service", getServiceInfo(((Map<String, Object>) infoEndpoint.info().get("build"))))
                 .build();
@@ -50,7 +57,7 @@ public class ServiceVersionHealthIndicator implements HealthIndicator {
 
     private Map<String, Object> getServiceInfo(Map<String, Object> buildMap) {
         final HashMap<String, Object> serviceInfoMap = new HashMap<>();
-        serviceInfoMap.put("name", buildMap.get("artifact"));
+        serviceInfoMap.put("name", applicationName);
         serviceInfoMap.put("version", buildMap.get("version"));
         return serviceInfoMap;
     }
